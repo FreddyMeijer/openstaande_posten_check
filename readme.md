@@ -10,5 +10,29 @@ Soms wordt de materialized view niet goed aangemaakt en kan je het rapport niet 
 - Geef het commando `pip install -r openstaande_posten_check/requirements.txt`
 - Draai `opvragen_files.py`
 
+## config.py
+Om de code goed uit te voeren is het noodzakelijk dat een bestand wordt opgenomen met de naam config.py. Hierin vind je de volgende informatie:
+
+```python
+url = xxxxxx
+authProfileUuid = yyyyyyy
+username = zzzzzzz
+password = wwwwwww
+```
+
+Hierbij geldt dat de url gevuld wordt met de endpoint van de GraphQL playground van de betreffende omgeving. `authProfileUuid` is de unieke ID van de rol die probeert in te loggen. `username` en `password` spreken voor zichzelf. Als `config.py` mist, krijg je een error:
+
+```python
+Traceback (most recent call last):
+  File "...\opvragen_files.py", line 12, in <module>   
+    header = token()
+             ^^^^^^^
+  File "...\function_token_PAL21.py", line 24, in token
+    bearer = 'Bearer ' + responseParsed['data']['login']['jwtToken']
+                         ~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'data'
+```
+<b>config.py is niet opgenomen in de respository in verband met beveiliging</b>
+
 ## Resultaten
 Als het script gedraaid is, zal een bestand <i>allFiles.csv</i> opgeslagen worden in de root van het project. In deze CSV vind je de laatste 200 regels die aangemaakt zijn met als peildatum vandaag.
